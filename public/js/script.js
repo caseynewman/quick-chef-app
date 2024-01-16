@@ -22,8 +22,8 @@ const getRecipes = async () => {
 }
 
 const joinFilters = (queryFilters) => {
-    let newQueryFilters = queryFilters.slice(0,-1)
-    baseURL+=newQueryFilters
+    let newQueryFilters = queryFilters.slice(0, -1)
+    baseURL += newQueryFilters
     getRecipes(baseURL)
 }
 
@@ -50,6 +50,16 @@ console.log(ingredients2)
 
 searchBtn.addEventListener('click', findRecipes);
 
+
+let recipeID = 715415
+
+const getSpecificRecipe = async () => {
+    const response = await fetch(`https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=36808371f778457eb823b528e2d0a3a6`)
+    const data = await response.json()
+    console.log(data)
+}
+
+getSpecificRecipe()
 
 /**
  * Uncomment the below code to POST data to the database
