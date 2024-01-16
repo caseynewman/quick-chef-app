@@ -56,10 +56,10 @@ searchBtn.addEventListener('click', findRecipes);
  */
 
 
-// const postTrips = async(tripObj) => {
-//     const response = await fetch('/api/trips', {
+// const postRecipes = async(recipeObj) => {
+//     const response = await fetch('/api/recipes', {
 //         method: 'POST',
-//         body: JSON.stringify(tripObj),
+//         body: JSON.stringify(recipeObj),
 //         headers: {
 //             'Content-Type': 'application/json',
 //         }
@@ -70,25 +70,25 @@ searchBtn.addEventListener('click', findRecipes);
 //     console.log(data)
 // }
 
-// const newTrip = {
+// const newRecipe = {
 //     name: 'pretty cool mountain adventure',
 //     description: 'more than okay!!!'
 // }
 
-// postTrips(newTrip)
+// postRecipes(newRecipe)
 
 /**
  * Uncomment the below code to GET data from the database
  */
 
 
-// const getTrips = async() => {
-//     const response = await fetch('/api/trips')
+// const getRecipes = async() => {
+//     const response = await fetch('/api/recipes')
 //     const data = await response.json()
 //     console.log(data)
 // }
 
-// getTrips()
+// getRecipes()
 
 
 /**
@@ -96,8 +96,8 @@ searchBtn.addEventListener('click', findRecipes);
  */
 
 
-// const deleteTrips = async(id) => {
-//    const response = await fetch(`/api/trips/{id}`, {
+// const deleteRecipes = async(id) => {
+//    const response = await fetch(`/api/recipes/{id}`, {
 //         method: 'DELETE',
 //         headers: {
 //             'Content-Type': 'application/json',
@@ -107,23 +107,23 @@ searchBtn.addEventListener('click', findRecipes);
 //     console.log(data)
 // }
 
-// deleteTrip(1)
+// deleteRecipe(1)
 
 
 /**
  * Uncomment the below code to Update data in the database
  */
 
-// const newTrip = {
+// const newRecipe = {
 //     name: 'pretty cool mountain adventure',
 //     description: 'WAY WAY more than okay!!!'
 // }
 
 
-// const updateTrip = async(id, newTripObj) => {
-//    const response = await fetch(`/api/trips/{id}`, {
+// const updateRecipe = async(id, newRecipeObj) => {
+//    const response = await fetch(`/api/recipes/{id}`, {
 //         method: 'PUT',
-//         body: JSON.stringify(newTripObj),
+//         body: JSON.stringify(newRecipeObj),
 //         headers: {
 //             'Content-Type': 'application/json',
 //         }
@@ -132,7 +132,7 @@ searchBtn.addEventListener('click', findRecipes);
 //     console.log(data)
 // }
 
-// updateTrip(1, newTrip)
+// updateRecipe(1, newRecipe)
 
 
 
