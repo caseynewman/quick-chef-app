@@ -79,11 +79,7 @@ const getSpecificRecipe = async () => {
 }
 
 
-<<<<<<< HEAD
-const displayRecipes = (data) => {
-=======
 const clearResultArea = () => {
->>>>>>> 197cb9a79ccd137b2d4bf5435e874499b443e653
     recipesContainer.textContent = '';
 }
 
@@ -99,13 +95,8 @@ const displayRecipes = (data) => {
     // const maxReadyTime = document.createElement('p');
     const recipeImage = document.createElement('img');
 
-<<<<<<< HEAD
-    recipeName.textContent = data.results.title;
-    maxReadyTime.textContent = data.readyInMinutes;
-=======
     recipeName.textContent = data.title;
-    // maxReadyTime.textContent = data.readInMinutes;
->>>>>>> 197cb9a79ccd137b2d4bf5435e874499b443e653
+    // maxReadyTime.textContent = data.readyInMinutes;
     recipeImage.src = data.image;
     // need to adjust these ^^ so they're getting the info
 
