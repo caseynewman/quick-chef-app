@@ -1,31 +1,46 @@
 const searchBtn = document.querySelector('#recipe-search');
+const ingredientsInput = document.querySelector('#ingredients')
 const timeSlider = document.querySelector('#time-slider')
 const recipesContainer = document.querySelector('#recipes-container');
 
-let foodInput
+let recipeID = 715415
 
-const userSelections = {
+let userSelections = {
     includeIngredients: [],
-    intolerances: ['dairy'],
+    intolerances: [],
     maxReadyTime: 0
 }
 
-const findRecipes = () => {
-    createQueryFilters(userSelections);
-    displayRecipes();
+const setUserSelections = (event) => {
+    userSelections.includeIngredients = ingredientsInput.value.split(' ')
+    userSelections.maxReadyTime = timeSlider.value
+    ingredientsInput.value = ''
+    timeSlider.value = 30
 }
 
-let baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=36808371f778457eb823b528e2d0a3a6&instructionsRequired=true&sort=random`
+searchBtn.addEventListener('click', setUserSelections)
+
+const findRecipes = () => {
+    createQueryFilters(userSelections);
+}
+
+searchBtn.addEventListener('click', findRecipes);
+
+let baseURL 
 
 const getRecipes = async () => {
     const response = await fetch(baseURL)
     const data = await response.json()
     console.log(data)
+    clearResultArea()
+    data.results.forEach(displayRecipes)
 }
 
 const joinFilters = (queryFilters) => {
     let newQueryFilters = queryFilters.slice(0, -1)
+    baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=36808371f778457eb823b528e2d0a3a6&instructionsRequired=true&sort=random`
     baseURL += newQueryFilters
+    console.log(baseURL)
     getRecipes(baseURL)
 }
 
@@ -46,41 +61,118 @@ const createQueryFilters = (selection) => {
     joinFilters(queryFilters)
 }
 
-const ingredients = 'chicken, rice, eggs'
-const ingredients2 = ingredients.split(', ')
-console.log(ingredients2)
-
-searchBtn.addEventListener('click', findRecipes);
 
 
-let recipeID = 715415
+
+const saveClickedID = (event) => {
+    recipeID = event.target.id
+    getSpecificRecipe()
+}
+
 
 const getSpecificRecipe = async () => {
     const response = await fetch(`https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=36808371f778457eb823b528e2d0a3a6`)
     const data = await response.json()
     console.log(data)
+    clearResultArea()
+    displaySpecificRecipe(data)
 }
 
-getSpecificRecipe()
+
+<<<<<<< HEAD
+const displayRecipes = (data) => {
+=======
+const clearResultArea = () => {
+>>>>>>> 197cb9a79ccd137b2d4bf5435e874499b443e653
+    recipesContainer.textContent = '';
+}
+
 
 const displayRecipes = (data) => {
-    recipesContainer.textContent = '';
-
+    
     const recipeInfoEl = document.createElement('article');
     const recipeName = document.createElement('h2');
-    const maxReadyTime = document.createElement('p');
+    recipeName.setAttribute('id', data.id)
+    recipeName.setAttribute('class', 'recipe-name')
+    recipeName.addEventListener('click', saveClickedID)
+    console.log(recipeName)
+    // const maxReadyTime = document.createElement('p');
     const recipeImage = document.createElement('img');
 
+<<<<<<< HEAD
     recipeName.textContent = data.results.title;
     maxReadyTime.textContent = data.readyInMinutes;
+=======
+    recipeName.textContent = data.title;
+    // maxReadyTime.textContent = data.readInMinutes;
+>>>>>>> 197cb9a79ccd137b2d4bf5435e874499b443e653
     recipeImage.src = data.image;
     // need to adjust these ^^ so they're getting the info
 
     recipesContainer.appendChild(recipeInfoEl);
     recipeInfoEl.appendChild(recipeName);
-    recipeInfoEl.appendChild(maxReadyTime);
+    // recipeInfoEl.appendChild(maxReadyTime);
     recipeInfoEl.appendChild(recipeImage);
 }
+
+const displaySpecificRecipe = (data) => {
+    
+    const recipeInfoEl = document.createElement('article')
+    const recipeName = document.createElement('h2')
+    const favoriteButton = document.createElement('button')
+    const cookTime = document.createElement('p')
+    const dietsTitle = document.createElement('ul')
+    const diets = document.createElement('ul')
+    const recipeImage = document.createElement('img')
+    const ingredientsTitle = document.createElement('p')
+    const ingredients = document.createElement('ul')
+    const instructionsTitle = document.createElement('p')
+    const instructions = document.createElement('ol')
+
+    recipeName.textContent = data.title
+    favoriteButton.textContent = 'Favorite'
+    cookTime.textContent = "Ready in " + data.readyInMinutes + " minutes."
+    dietsTitle.textContent = "Diets:"
+    recipeImage.src = data.image
+    ingredientsTitle.textContent = "Ingredients:"
+    instructionsTitle.textContent = "Instructions:"
+
+    const createDietList = (data) => {
+        const diet = document.createElement('li')
+        diet.textContent = data
+        diets.appendChild(diet)
+    }
+
+    data.diets.forEach(createDietList)
+
+    const createIngredientsList = (data) => {
+        const ingredient = document.createElement('li')
+        ingredient.textContent = data.name
+        ingredients.appendChild(ingredient)
+    }
+
+    data.extendedIngredients.forEach(createIngredientsList)
+
+    const createInstructionsList = (data) => {
+        const instruction = document.createElement('li')
+        instruction.textContent = data.step
+        instructions.appendChild(instruction)
+    }
+
+    data.analyzedInstructions[0].steps.forEach(createInstructionsList)
+
+    recipesContainer.appendChild(recipeInfoEl)
+    recipeInfoEl.appendChild(recipeName)
+    recipeInfoEl.appendChild(favoriteButton)
+    recipeInfoEl.appendChild(cookTime)
+    recipeInfoEl.appendChild(dietsTitle)
+    recipeInfoEl.appendChild(diets)
+    recipeInfoEl.appendChild(recipeImage)
+    recipeInfoEl.appendChild(ingredientsTitle)
+    recipeInfoEl.appendChild(ingredients)
+    recipeInfoEl.appendChild(instructionsTitle)
+    recipeInfoEl.appendChild(instructions)
+} 
 
 /**
  * Uncomment the below code to POST data to the database
