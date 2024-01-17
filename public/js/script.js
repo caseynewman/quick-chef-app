@@ -63,7 +63,7 @@ const getSpecificRecipe = async () => {
 
 getSpecificRecipe()
 
-const displayRecipes = () => {
+const displayRecipes = (data) => {
     recipesContainer.textContent = '';
 
     const recipeInfoEl = document.createElement('article');
@@ -71,8 +71,8 @@ const displayRecipes = () => {
     const maxReadyTime = document.createElement('p');
     const recipeImage = document.createElement('img');
 
-    recipeName.textContent = data.title;
-    maxReadyTime.textContent = data.readInMinutes;
+    recipeName.textContent = data.results.title;
+    maxReadyTime.textContent = data.readyInMinutes;
     recipeImage.src = data.image;
     // need to adjust these ^^ so they're getting the info
 
