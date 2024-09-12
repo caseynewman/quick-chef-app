@@ -34,7 +34,7 @@ const displayFavRecipe = (recipeData) => {
     favRecipeName.innerHTML = `<button>${recipeData.name}</button>`;
     favRecipeName.setAttribute('class', 'recipe-name');
     favRecipeName.querySelector('button').setAttribute('data-recipe-id', recipeData.recipeId);
-    favRecipeName.querySelector('button').addEventListener('click', function (event) {
+    favRecipeName.querySelector('button').addEventListener('click', function (event) {      
         recipeID = event.target.getAttribute('data-recipe-id');
         const specificRecipe = _.find(favRecipesData, getSpecificRecipe);
         displaySpecificRecipe(specificRecipe);

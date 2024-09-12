@@ -1,3 +1,7 @@
-const Recipe = require('./Recipe');
+const Favorite = require('./Favorite');
+const User = require('./User')
 
-module.exports = { Recipe };
+Favorite.belongsTo(User)
+User.hasMany(Favorite)
+
+module.exports = { Favorite, User };

@@ -1,9 +1,8 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Recipe extends Model {}
-
-Recipe.init(
+class Favorite extends Model {}
+Favorite.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -36,6 +35,14 @@ Recipe.init(
     },
     diets: {
       type: DataTypes.TEXT
+    },
+    userID: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+          model: 'User',
+          key: 'id'
+      }
     }
 
     // date_created: {
@@ -53,4 +60,4 @@ Recipe.init(
   }
 );
 
-module.exports = Recipe;
+module.exports = Favorite;
